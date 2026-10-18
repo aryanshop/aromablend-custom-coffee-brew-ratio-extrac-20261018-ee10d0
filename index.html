@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AromaBlend: Precision Coffee Brew & Extraction Profiler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo-area">
+            <svg class="logo-icon" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+                <path fill="currentColor" d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H16A4,4 0 0,0 20,13V3M18,15H8A2,2 0 0,1 6,13V5H18V15Z" />
+            </svg>
+            <h1>AromaBlend</h1>
+        </div>
+        <p class="tagline">Dial in your perfect extraction ratio, water temperature, and flavor profile.</p>
+    </header>
+
+    <main class="main-container">
+        <!-- Control Panel / Input Section -->
+        <section class="card input-card">
+            <h2>Brew Parameters</h2>
+            <div class="form-group">
+                <label for="methodSelect">Brew Method</label>
+                <select id="methodSelect">
+                    <option value="v60">Pour Over (V60) - 1:16</option>
+                    <option value="chemex">Chemex - 1:17</option>
+                    <option value="espresso">Espresso - 1:2</option>
+                    <option value="aeropress">Aeropress - 1:14</option>
+                    <option value="frenchpress">French Press - 1:15</option>
+                </select>
+            </div>
+
+            <div class="input-row">
+                <div class="form-group">
+                    <label for="coffeeWeight">Coffee Dose (g)</label>
+                    <input type="number" id="coffeeWeight" value="20" min="5" max="100" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="waterWeight">Water Weight (g)</label>
+                    <input type="number" id="waterWeight" value="320" min="50" max="1500" step="1">
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="form-group">
+                    <label for="waterTemp">Water Temp (°C)</label>
+                    <input type="range" id="waterTemp" min="80" max="98" value="92" step="1">
+                    <span class="range-value" id="tempVal">92°C</span>
+                </div>
+                <div class="form-group">
+                    <label for="roastLevel">Roast Profile</label>
+                    <select id="roastLevel">
+                        <option value="light">Light Roast</option>
+                        <option value="medium" selected>Medium Roast</option>
+                        <option value="dark">Dark Roast</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="grindSize">Grind Size</label>
+                <input type="range" id="grindSize" min="1" max="10" value="5" step="1">
+                <div class="grind-labels">
+                    <span>Fine (Espresso)</span>
+                    <span>Medium (Pour Over)</span>
+                    <span>Coarse (French Press)</span>
+                </div>
+            </div>
+
+            <button id="calculateBtn" class="btn primary-btn">Calculate Brew Profile</button>
+        </section>
+
+        <!-- Output & Analytics Section -->
+        <section class="results-grid">
+            <!-- Metrics Card -->
+            <div class="card metrics-card">
+                <h2>Extraction Metrics</h2>
+                <div class="metrics-container">
+                    <div class="metric-box">
+                        <span class="metric-label">Ratio</span>
+                        <span class="metric-value" id="resRatio">1 : 16.0</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Est. Brew Time</span>
+                        <span class="metric-value" id="resTime">3:00</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">Extraction %</span>
+                        <span class="metric-value" id="resExtraction">19.5%</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">TDS (Strength)</span>
+                        <span class="metric-value" id="resTds">1.35%</span>
+                    </div>
+                </div>
+                <div id="extractionStatus" class="status-badge optimal">Optimal Extraction Balance</div>
+            </div>
+
+            <!-- Flavor Radar Simulation Card -->
+            <div class="card radar-card">
+                <h2>Flavor Profile Estimate</h2>
+                <div class="canvas-container">
+                    <canvas id="radarCanvas" width="300" height="300" aria-label="Flavor radar chart visualization"></canvas>
+                </div>
+                <div class="flavor-legend">
+                    <span class="legend-item"><i class="dot acidity"></i> Acidity</span>
+                    <span class="legend-item"><i class="dot sweetness"></i> Sweetness</span>
+                    <span class="legend-item"><i class="dot body"></i> Body</span>
+                    <span class="legend-item"><i class="dot bitterness"></i> Bitterness</span>
+                    <span class="legend-item"><i class="dot clarity"></i> Clarity</span>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Guide Card -->
+            <div class="card guide-card">
+                <h2>Step-by-Step Pour Guide</h2>
+                <ol id="stepsList" class="steps-list">
+                    <!-- Dynamically populated steps -->
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>AromaBlend Static Calculator • Designed for coffee lovers & baristas.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
